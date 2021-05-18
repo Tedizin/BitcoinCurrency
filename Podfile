@@ -7,7 +7,7 @@ target 'BitcoinCurrency' do
 
   # Pods for BitcoinCurrency
 
-pod 'Alamofire', '~> 5.4'
 pod 'SwiftyJSON', '~> 5.0'
+pod 'Alamofire', '~> 5.2'
 
 end
