@@ -7,14 +7,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     //MARK: - IBOutlets
+    
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var coinPickerView: UIPickerView!
     
     //MARK: - Constats
     
     let baseUrl = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCAUD"
-    let currencies = [""]
+    let curruncies = ["AUD", "BRL", "CAD", "CNY", "EUR", "OBP", "HKD", "IDR", "ILS", "INR", "JPY","MXN","NOK","PLN","RON","RUB","SEK","SOD","USD","ZAR"]
     
     //MARK: - Variables
     
@@ -24,10 +27,34 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fethData(url: baseUrl)
+        fetchData(url: baseUrl)
+        coinPickerView.delegate = self
+        coinPickerView.dataSource = self
+        
     }
     
-    func fethData(url: String) {
+    //MARK: - PickerView
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return curruncies.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return curruncies[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let url = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC\(curruncies[row])"
+        fetchData(url: url)
+        }
+    
+    //MARK: - Data
+    
+    func fetchData(url: String) {
 
         let url = URL(string: url)!
         
@@ -37,13 +64,39 @@ class ViewController: UIViewController {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let data = data {
-                let dataString = String(data: data, encoding: .utf8)
-                print(dataString!)
+                self.parseJSON(json: data)
             } else {
                 print("DEU TUDO ERRADO")
             }
         }
         task.resume()
+    }
+    
+    //MARK: - JSON
+    
+    func parseJSON(json: Data) {
+        
+        do {
+            
+            if let json = try JSONSerialization.jsonObject(with: json, options: .mutableContainers) as? [String: Any] {
+                print(json)
+                if let askValue = json["ask"] as? NSNumber {
+                    print(askValue)
+                    
+                    let askvalueString = "\(askValue)"
+                    DispatchQueue.main.async {
+                        
+                        self.priceLabel.text = askvalueString
+                    }
+                    print("success")
+                } else {
+                    print("error")
+                }
+            }
+        } catch {
+            
+            print("error parsing json: \(error)")
+        }
     }
 }
 
