@@ -16,24 +16,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T4c-tl-Ke3">
-                                <rect key="frame" x="0.0" y="700" width="414" height="162"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ico-bitcoin" translatesAutoresizingMaskIntoConstraints="NO" id="TWb-Bh-563">
-                                <rect key="frame" x="0.0" y="58" width="414" height="423"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLK-LO-hhd">
-                                <rect key="frame" x="20" y="489" width="374" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bdV-mF-sVj">
+                                <rect key="frame" x="10" y="44" width="394" height="808"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OTq-Hd-827" userLabel="TopView">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="262.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-bitcoin" translatesAutoresizingMaskIntoConstraints="NO" id="TWb-Bh-563">
+                                                <rect key="frame" x="0.0" y="-228.5" width="394" height="720"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="TWb-Bh-563" secondAttribute="trailing" id="Iad-Ad-xu6"/>
+                                            <constraint firstItem="TWb-Bh-563" firstAttribute="centerX" secondItem="OTq-Hd-827" secondAttribute="centerX" id="J4j-yo-tnb"/>
+                                            <constraint firstItem="TWb-Bh-563" firstAttribute="centerY" secondItem="OTq-Hd-827" secondAttribute="centerY" id="QnR-0l-up4"/>
+                                            <constraint firstItem="TWb-Bh-563" firstAttribute="leading" secondItem="OTq-Hd-827" secondAttribute="leading" id="dAT-e2-Yoc"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsO-LB-xML" userLabel="Center View">
+                                        <rect key="frame" x="0.0" y="272.5" width="394" height="263"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLK-LO-hhd">
+                                                <rect key="frame" x="164.5" y="113.5" width="65.5" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="eLK-LO-hhd" firstAttribute="centerX" secondItem="fsO-LB-xML" secondAttribute="centerX" id="ETS-M0-1EG"/>
+                                            <constraint firstItem="eLK-LO-hhd" firstAttribute="centerY" secondItem="fsO-LB-xML" secondAttribute="centerY" id="Wdn-Hv-3Zh"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kIC-Q0-OEK" userLabel="Botton View">
+                                        <rect key="frame" x="0.0" y="545.5" width="394" height="262.5"/>
+                                        <subviews>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T4c-tl-Ke3">
+                                                <rect key="frame" x="37" y="23" width="320" height="216"/>
+                                            </pickerView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="T4c-tl-Ke3" firstAttribute="centerY" secondItem="kIC-Q0-OEK" secondAttribute="centerY" id="T4H-02-4su"/>
+                                            <constraint firstItem="T4c-tl-Ke3" firstAttribute="centerX" secondItem="kIC-Q0-OEK" secondAttribute="centerX" id="hGv-w4-0nI"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="OTq-Hd-827" firstAttribute="top" secondItem="bdV-mF-sVj" secondAttribute="top" id="Bqf-Rf-TPv"/>
+                                    <constraint firstItem="OTq-Hd-827" firstAttribute="leading" secondItem="bdV-mF-sVj" secondAttribute="leading" id="IWp-Xj-PIa"/>
+                                    <constraint firstAttribute="trailing" secondItem="fsO-LB-xML" secondAttribute="trailing" id="MJA-KP-c1J"/>
+                                    <constraint firstAttribute="bottom" secondItem="kIC-Q0-OEK" secondAttribute="bottom" id="ZRh-jR-WQg"/>
+                                    <constraint firstItem="kIC-Q0-OEK" firstAttribute="leading" secondItem="bdV-mF-sVj" secondAttribute="leading" id="aI4-sn-oDm"/>
+                                    <constraint firstItem="fsO-LB-xML" firstAttribute="leading" secondItem="bdV-mF-sVj" secondAttribute="leading" id="ipb-tZ-zVv"/>
+                                    <constraint firstAttribute="trailing" secondItem="kIC-Q0-OEK" secondAttribute="trailing" id="jK9-1r-7jU"/>
+                                    <constraint firstAttribute="trailing" secondItem="OTq-Hd-827" secondAttribute="trailing" id="oV2-O0-boB"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bdV-mF-sVj" secondAttribute="trailing" constant="10" id="5LG-GS-X8j"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bdV-mF-sVj" secondAttribute="bottom" constant="10" id="KYC-eO-PsI"/>
+                            <constraint firstItem="bdV-mF-sVj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="UmV-OS-Ljx"/>
+                            <constraint firstItem="bdV-mF-sVj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="iyw-zd-1bT"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="currencyPickerView" destination="T4c-tl-Ke3" id="poe-rg-LOK"/>
@@ -46,7 +93,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ico-bitcoin" width="603" height="605"/>
+        <image name="ico-bitcoin" width="1280" height="720"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

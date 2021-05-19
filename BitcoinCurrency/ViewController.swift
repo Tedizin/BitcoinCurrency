@@ -72,21 +72,29 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         task.resume()
     }
     
+    func formatNumberToDecimal(value:Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale(identifier: "pt_BR")
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.numberStyle = .decimal
+
+        return numberFormatter.string(from: NSNumber(value:value)) ?? "undefined value"
+    }
+    
     //MARK: - JSON
     
     func parseJSON(json: Data) {
-        
+
         do {
-            
+
             if let json = try JSONSerialization.jsonObject(with: json, options: .mutableContainers) as? [String: Any] {
                 print(json)
                 if let askValue = json["ask"] as? NSNumber {
                     print(askValue)
-                    
-                    let askvalueString = "R$\(askValue)"
+
+                    let askvalueString = "\(askValue)"
                     DispatchQueue.main.async {
-                        
-                        self.priceLabel.text = askvalueString
+                        self.priceLabel.text = self.formatNumberToDecimal(value: Double(askvalueString)!)
                     }
                     print("success")
                 } else {
@@ -94,7 +102,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 }
             }
         } catch {
-            
+
             print("error parsing json: \(error)")
         }
     }
