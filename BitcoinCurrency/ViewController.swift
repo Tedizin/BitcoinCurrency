@@ -12,7 +12,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //MARK: - IBOutlets
     
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var coinPickerView: UIPickerView!
+    @IBOutlet weak var currencyPickerView: UIPickerView!
     
     //MARK: - Constats
     
@@ -28,8 +28,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData(url: baseUrl)
-        coinPickerView.delegate = self
-        coinPickerView.dataSource = self
+        currencyPickerView.delegate = self
+        currencyPickerView.dataSource = self
         
     }
     
@@ -83,7 +83,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 if let askValue = json["ask"] as? NSNumber {
                     print(askValue)
                     
-                    let askvalueString = "\(askValue)"
+                    let askvalueString = "R$\(askValue)"
                     DispatchQueue.main.async {
                         
                         self.priceLabel.text = askvalueString
